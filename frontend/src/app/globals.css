@@ -2,8 +2,10 @@
 
 :root {
   --background: #ffffff;
+  --dark: #161616;
   --foreground: #b31b1b;
   --foreground-hover: #801414;
+  --border-color: #c9c9c9;
 }
 
 @theme inline {
