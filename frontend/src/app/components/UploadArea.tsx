@@ -1,7 +1,7 @@
 "use client"
 
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
+import SummarizeButton from "./SummarizeButton";
 
 export default function UploadArea() {
   const [buttonClick, setButtonClick] = useState(false);
@@ -60,11 +60,7 @@ export default function UploadArea() {
               <div className="text-center text-[var(--dark)]">
                 <p className="text-lg font-semibold">File Selected:</p>
                 <p className="text-md">{file.name}</p>
-                <button 
-                className="p-10 mt-4 bg-[var(--foreground)] text-[var(--background)] font-bold text-lg px-4 py-2 rounded hover:bg-[var(--foreground-hover)] transition-colors duration-200"
-                >
-                  Summarize Paper
-                </button>
+                <SummarizeButton uploadedPDF={file} />
               </div>
             )}
           </div>
