@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 import UploadArea from './components/UploadArea';
+import Footer from './components/Footer';
 
 export default function Home() {
   return (
@@ -21,11 +22,7 @@ export default function Home() {
         </div>
       </div>
 
-      <footer className="bg-[var(--foreground)] text-[var(--background)] p-2 text-center">
-        <p className="text-sm italic">
-          Made with ❤️ by Ali
-        </p>
-      </footer>
+      <Footer />
     </div>
   );
 }
