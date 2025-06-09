@@ -60,7 +60,7 @@ export default function UploadArea() {
               <div className="text-center text-[var(--dark)]">
                 <p className="text-lg font-semibold">File Selected:</p>
                 <p className="text-md">{file.name}</p>
-                <SummarizeButton uploadedPDF={file} />
+                <SummarizeButton uploadedPDF={file} fileName={file.name} />
               </div>
             )}
           </div>

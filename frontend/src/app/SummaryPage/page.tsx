@@ -7,7 +7,7 @@ import Footer from '../components/Footer';
 
 export default function SummarizePage() {
   const [summary, setSummary] = useState('');
-  const { file } = useUploadContext();
+  const { file, fileName } = useUploadContext();
 
   useEffect(() => {
     const fetchSummary = async () => {
@@ -40,9 +40,9 @@ export default function SummarizePage() {
   return (
     <div className="flex flex-col h-screen w-screen">
         <Navbar />
-        <div>
+        <div className='flex flex-1 flex-col items-center justify-center w-full max-w-2xl mx-auto px-6'>
             <h1 className="text-2xl font-bold mb-6">
-                Paper Summary
+                &quot;{fileName}&quot; Summary
             </h1>
             {summary ?
                 <p className='text-md text-center text-[var(--dark)] max-w-2xl'>

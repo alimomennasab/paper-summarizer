@@ -4,13 +4,15 @@ import { useUploadContext } from './UploadContext';
 
 type SummarizeButtonProps = {
     uploadedPDF: File | null;
+    fileName?: string;
 }
 
-export default function SummarizeButton({uploadedPDF}: SummarizeButtonProps) {
+export default function SummarizeButton({uploadedPDF, fileName}: SummarizeButtonProps) {
     const router = useRouter();
-    const { setFile } = useUploadContext();
+    const { setFile, setFileName } = useUploadContext();
     const handleClick = () => {
         setFile(uploadedPDF);
+        setFileName(fileName?.replace(".pdf", "") ?? null);
         router.push('/SummaryPage');
     }
 
