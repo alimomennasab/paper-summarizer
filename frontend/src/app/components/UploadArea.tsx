@@ -4,11 +4,18 @@ import React, { useState } from "react";
 import SummarizeButton from "./SummarizeButton";
 
 export default function UploadArea() {
-  const [buttonClick, setButtonClick] = useState(false);
+  const [uploadButtonClick, setUploadButtonClick] = useState(false);
+  const [closeButtonClick, setCloseButtonClick] = useState(false);
   const [file, setFile] = useState<File | null>(null);
 
-  const handleClick = () => {
-    setButtonClick(!buttonClick);
+  const handleSummarizeClick = () => {
+    setUploadButtonClick(!uploadButtonClick);
+  }
+
+  const handleCloseClick = () => {
+    setCloseButtonClick(!closeButtonClick);
+    setFile(null);
+    setUploadButtonClick(false); 
   }
 
   const handleFileUpload = (uploadedFile: React.SetStateAction<File | null>) => {
@@ -20,12 +27,12 @@ export default function UploadArea() {
       <div className="flex flex-col items-center justify-center">
         <button 
         className="p-10 bg-[var(--foreground)] text-[var(--background)] font-bold text-lg px-4 py-2 rounded hover:bg-[var(--foreground-hover)] transition-colors duration-200"
-        onClick={handleClick}
+        onClick={handleSummarizeClick}
         >
           Upload Your Paper
         </button>
       </div>
-      {buttonClick && (
+      {uploadButtonClick && (
           // Upload popup
           <div className="absolute bg-[var(--background)] flex flex-col items-center justify-center w-1/2 h-1/2 overflow-hidden border border-[var(--border-color)] rounded-lg p-10 shadow-md gap-5 min-h-[60vh] max-h-[90vh] overflow-y-auto">
             <h1 className="text-4xl font-bold text-center">
@@ -57,12 +64,22 @@ export default function UploadArea() {
               </p>
             </div>
             {file && (
-              <div className="text-center text-[var(--dark)]">
-                <p className="text-lg font-semibold">File Selected:</p>
-                <p className="text-md">{file.name}</p>
+                <div className="text-center text-[var(--dark)]">
+                  <p className="text-lg font-semibold">File Selected:</p>
+                  <p className="text-md">{file.name}</p>
+                </div>
+              )}
+            <div className="flex flex-row justify-center items-center gap-4">
+              <button 
+                className="bg-[var(--foreground)] text-[var(--background)] font-bold text-lg px-4 py-2 rounded hover:bg-[var(--foreground-hover)] transition-colors duration-200"
+                onClick={handleCloseClick}
+              >
+                Exit
+              </button>
+              {file && (
                 <SummarizeButton uploadedPDF={file} fileName={file.name} />
-              </div>
-            )}
+              )}
+            </div>
           </div>
         )}
     </>
