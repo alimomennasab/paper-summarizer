@@ -5,11 +5,13 @@ import { useUploadContext } from '../components/UploadContext';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import LoadingOverlay from '../components/LoadingOverlay';
+import { useRouter } from 'next/navigation';
 
 export default function SummarizePage() {
   const [summary, setSummary] = useState('');
   const { file, fileName } = useUploadContext();
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setLoading(true);
@@ -41,6 +43,10 @@ export default function SummarizePage() {
     fetchSummary();
   }, [file]);
 
+  const handleHomeButtonClick = () => {
+    router.push('/');
+  };
+
   return (
     <div className="flex flex-col h-screen w-screen">
       {loading && <LoadingOverlay />}
@@ -54,6 +60,12 @@ export default function SummarizePage() {
               <p className='text-md text-center text-[var(--dark)] max-w-2xl'>
                 {summary}
               </p>
+              <button 
+                className="bg-[var(--foreground)] text-[var(--background)] font-bold text-lg px-4 py-2 rounded hover:bg-[var(--foreground-hover)] transition-colors duration-200"
+                onClick={handleHomeButtonClick}
+              >
+                Return Home
+              </button>
             </div>
           )}
       </div>
