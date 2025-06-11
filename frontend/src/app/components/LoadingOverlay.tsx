@@ -29,7 +29,7 @@ export default function LoadingOverlay() {
             d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2.93 6.93A8.003 8.003 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3.93-1.008z"
           ></path>
         </svg>
-        <p className="mt-4 text-lg text-[var(--primary-text)]">Generating Summary...</p>
+        <p className="mt-4 text-lg text-[var(--dark)]">Generating Summary...</p>
       </div>
     </div>
   );

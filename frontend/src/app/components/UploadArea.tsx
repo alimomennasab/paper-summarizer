@@ -2,11 +2,14 @@
 
 import React, { useState } from "react";
 import SummarizeButton from "./SummarizeButton";
+import { FileUploader } from "react-drag-drop-files";
 
 export default function UploadArea() {
   const [uploadButtonClick, setUploadButtonClick] = useState(false);
   const [closeButtonClick, setCloseButtonClick] = useState(false);
   const [file, setFile] = useState<File | null>(null);
+  const fileTypes = ["PDF"];
+
 
   const handleSummarizeClick = () => {
     setUploadButtonClick(!uploadButtonClick);
@@ -34,35 +37,30 @@ export default function UploadArea() {
       </div>
       {uploadButtonClick && (
           // Upload popup
-          <div className="absolute bg-[var(--background)] flex flex-col items-center justify-center w-1/2 h-1/2 overflow-hidden border border-[var(--border-color)] rounded-lg p-10 shadow-md gap-5 min-h-[60vh] max-h-[90vh] overflow-y-auto">
+          <div className="absolute bg-[var(--background)] flex flex-col items-center justify-center w-1/2 h-1/2 overflow-hidden border border-[var(--border-color)] rounded-lg p-10 shadow-md gap-5 min-h-[60vh] max-h-[90vh]">
             <h1 className="text-4xl font-bold text-center">
               Upload Your Research Paper
             </h1>
             <p className="text-lg text-[var(--dark)] text-center m-4">
               Please upload your research paper in PDF format.
             </p>
-            <div className="cursor-pointer flex flex-col justify-center items-center w-3/4 h-1/2 border-2 border-dashed border-[var(--border-color)] rounded-lg">
-              <input
-                id="fileUpload"
-                type="file"
-                accept=".pdf"
-                className="hidden"
-                onChange={(e) => {
-                  if (e.target.files && e.target.files[0]) {
-                    handleFileUpload(e.target.files[0]);
-                  }
-                }}
-              />
-              <label
-                htmlFor="fileUpload"
-                className="p-4 mb-4 text-center text-[var(--dark)]"
-              >
-                Choose a paper or drag and drop it here
-              </label>
-              <p className="text-sm text-[var(--light-text)]">
-                PDF-formatted papers only.
-              </p>
-            </div>
+            <FileUploader
+              handleChange={handleFileUpload}
+              name="pdf"
+              types={["PDF"]}
+              multiple={false}
+              accept=".pdf"
+              uploadedLabel="Uploaded Successfully"
+            >
+              <div className="w-[100%] h-[20vh] border-2 border-dashed border-[var(--border-color)] rounded-xl p-8 flex flex-col items-center justify-center cursor-pointer text-center mt-auto mb-auto">
+                <p className="text-lg font-semibold text-[var(--dark)] mb-4">
+                  Select or drag and drop your paper
+                </p>
+                <p className="text-sm text-[var(--light-text)]">
+                  (Only PDF files accepted)
+                </p>
+              </div>
+            </FileUploader>
             {file && (
                 <div className="text-center text-[var(--dark)]">
                   <p className="text-lg font-semibold">File Selected:</p>
