@@ -14,6 +14,9 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "Research Paper Summarizer",
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({
