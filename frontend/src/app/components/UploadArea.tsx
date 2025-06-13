@@ -47,9 +47,8 @@ export default function UploadArea() {
             <FileUploader
               handleChange={handleFileUpload}
               name="pdf"
-              types={["PDF"]}
+              types={fileTypes}
               multiple={false}
-              accept=".pdf"
               uploadedLabel="Uploaded Successfully"
             >
               <div className="w-[100%] h-[20vh] border-2 border-dashed border-[var(--border-color)] rounded-xl p-8 flex flex-col items-center justify-center cursor-pointer text-center mt-auto mb-auto">

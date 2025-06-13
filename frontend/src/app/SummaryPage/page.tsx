@@ -6,6 +6,8 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import LoadingOverlay from '../components/LoadingOverlay';
 import { useRouter } from 'next/navigation';
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm';
 
 export default function SummarizePage() {
   const [summary, setSummary] = useState('');
@@ -57,9 +59,23 @@ export default function SummarizePage() {
               <h1 className="text-2xl font-bold mb-6 text-[var(--foreground)]">
                 &quot;{fileName}&quot; Summary
               </h1>
-              <p className='text-md text-center text-[var(--dark)] max-w-2xl'>
-                {summary}
-              </p>
+              <div className="max-w-2xl text-[var(--dark)]">
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  components={{
+                    h1: (props) => <h1 className="text-2xl font-bold mt-6 mb-2 text-[var(--foreground)]" {...props} />,
+                    h2: (props) => <h2 className="text-xl font-semibold mt-4 mb-1 text-[var(--foreground)]" {...props} />,
+                    h3: (props) => <h3 className="text-lg font-semibold mt-3 mb-1 text-[var(--foreground)]" {...props} />,
+                    strong: (props) => <strong className="font-bold text-[var(--foreground)]" {...props} />,
+                    ul: (props) => <ul className="list-disc pl-6 mb-4" {...props} />,
+                    ol: (props) => <ol className="list-decimal pl-6 mb-4" {...props} />,
+                    li: (props) => <li className="mb-1" {...props} />,
+                    p: (props) => <p className="mb-3 text-[var(--dark)]" {...props} />,
+                  }}
+                >
+                  {summary}
+                </ReactMarkdown>
+              </div>
               <button 
                 className="bg-[var(--foreground)] text-[var(--background)] font-bold text-lg px-4 py-2 rounded hover:bg-[var(--foreground-hover)] transition-colors duration-200"
                 onClick={handleHomeButtonClick}

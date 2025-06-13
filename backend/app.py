@@ -40,7 +40,14 @@ def summarize():
     client = openai.OpenAI(api_key=key)
     response = client.responses.create(
         model="gpt-4.1-nano",
-        input=f"Summarize this research paper succinctly and clearly: {summarized_text}",
+        input = (
+            f"Summarize this research paper succinctly and clearly using Markdown syntax: {summarized_text}. "
+            f"Begin with a brief summary paragraph (no title). "
+            f"Then, structure the rest of the output using Markdown headers and bullet points. "
+            f"Use `#` for main section headers (e.g., Introduction, Methodology), `##` for subheaders, and `-` for key bullet points under each. "
+            f"Make sure each section is clearly separated and properly formatted with markdown format."
+            f"Please do not generate a references/citation section, as we are just summarizing the paper "
+        ),
         max_output_tokens = total_tokens
     )
 
