@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useUploadContext } from '../components/UploadContext';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -8,12 +8,14 @@ import LoadingOverlay from '../components/LoadingOverlay';
 import { useRouter } from 'next/navigation';
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm';
+import ExportPdfButton from '../components/ExportPdfButton';
 
 export default function SummarizePage() {
   const [summary, setSummary] = useState('');
   const { file, fileName } = useUploadContext();
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const targetRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setLoading(true);
@@ -53,7 +55,7 @@ export default function SummarizePage() {
     <div className="flex flex-col h-screen w-screen">
       {loading && <LoadingOverlay />}
       <Navbar />
-      <div className='flex flex-1 flex-col items-center justify-center w-full max-w-2xl mx-auto px-6'>
+      <div ref={targetRef} className='flex flex-1 flex-col items-center justify-center w-full max-w-2xl mx-auto px-6'>
           {summary && (
             <div className="flex flex-col items-center justify-center border border-[var(--border-color)] rounded-lg gap-6 p-10 shadow-md">
               <h1 className="text-2xl font-bold mb-6 text-[var(--foreground)]">
@@ -76,12 +78,15 @@ export default function SummarizePage() {
                   {summary}
                 </ReactMarkdown>
               </div>
-              <button 
-                className="bg-[var(--foreground)] text-[var(--background)] font-bold text-lg px-4 py-2 rounded hover:bg-[var(--foreground-hover)] transition-colors duration-200"
-                onClick={handleHomeButtonClick}
-              >
-                Return Home
-              </button>
+              <div className="flex flex-row justify-center items-center gap-4">
+                <button 
+                  className="bg-[var(--foreground)] text-[var(--background)] font-bold text-lg px-4 py-2 rounded hover:bg-[var(--foreground-hover)] transition-colors duration-200"
+                  onClick={handleHomeButtonClick}
+                >
+                  Return Home
+                </button>
+                <ExportPdfButton fileName={fileName ?? undefined} targetRef={targetRef} />
+              </div>
             </div>
           )}
       </div>
