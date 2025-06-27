@@ -11,7 +11,7 @@ Backend & Middleware:
 - OpenAI API: summarizing papers with GPT-4o
 
 # Demo
-https://github.com/user-attachments/assets/847ac969-ef8a-4658-83d9-cb41c360bc4d
+https://github.com/user-attachments/assets/3cd88f39-6eb4-4321-9a54-64ee31fe93ee
 
 # How to run locally: 
 ```bash
@@ -21,6 +21,7 @@ cd paper-summarizer
 
 
 2. Install backend dependencies
+cd backend
 pip install -r requirements.txt
 
 3. Install frontend dependencies
