@@ -14,7 +14,7 @@ Backend & Middleware:
 https://github.com/user-attachments/assets/847ac969-ef8a-4658-83d9-cb41c360bc4d
 
 # How to run locally: 
-``bash
+```bash
 1. Clone the repository
 git clone https://github.com/yourusername/paper-summarizer.git
 cd paper-summarizer
